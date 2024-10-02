@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     private int damageHit;
-   public int DamageHit
+    public int DamageHit
     {
         get
         {
@@ -17,6 +17,9 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public Animator anim;
+    public Rigidbody2D rb;
+    [SerializeField] private int health;
     private void Start()
     {
         Behavior();
