@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Crocodile : Enemy
+public class Crocodile : Enemy, Ishootable
 {
-    [SerializeField]private float attackRange;
-    public Player player;
+    [SerializeField] private float attackRange;
+    [SerializeField] public Player player;
 
-    [SerializeField]private GameObject bullet;
-    [SerializeField]private Transform bulletSpawnPoint;
-    [SerializeField]private float bulletSpawnTime;
-    [SerializeField]private float bulletTimer;
+    [field : SerializeField]public GameObject Bullet { get; set; }
+    [field: SerializeField]public Transform BulletSpawnPoint { get; set; }
+    [field: SerializeField] public float BulletSpawnTime { get; set; }
+    [field: SerializeField] public float BulletTimer { get; set; }
 
     private void Update()
     {
-        bulletTimer -= Time.deltaTime;
+        BulletTimer -= Time.deltaTime;
 
         Behavior();
     }
@@ -30,13 +30,13 @@ public class Crocodile : Enemy
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        if(bulletTimer <= 0)
+        if(BulletTimer <= 0)
         {
-            Instantiate(bullet, bulletSpawnPoint.position,Quaternion.identity);
+            Instantiate(Bullet, BulletSpawnPoint.position,Quaternion.identity);
 
-            bulletTimer = bulletSpawnTime;
+            BulletTimer = BulletSpawnTime;
         }
         
     }
