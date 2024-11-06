@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Crocodile : Enemy, Ishootable
+public class Crocodile : Enemy, IShootable
 {
     [SerializeField] private float attackRange;
     [SerializeField] public Player player;
@@ -12,6 +13,16 @@ public class Crocodile : Enemy, Ishootable
     [field: SerializeField]public Transform BulletSpawnPoint { get; set; }
     [field: SerializeField] public float BulletSpawnTime { get; set; }
     [field: SerializeField] public float BulletTimer { get; set; }
+
+    void Start()
+    {
+        BulletTimer = 0.0f;
+        BulletSpawnTime = 5.0f;
+        DamageHit = 30;
+        attackRange = 6;
+        player = GameObject.FindObjectOfType<Player>();
+
+    }
 
     private void Update()
     {
@@ -34,10 +45,13 @@ public class Crocodile : Enemy, Ishootable
     {
         if(BulletTimer <= 0)
         {
-            Instantiate(Bullet, BulletSpawnPoint.position,Quaternion.identity);
-
+            anim.SetTrigger("Shoot");
+            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position,Quaternion.identity);
+            Rock rock = obj.gameObject.GetComponent<Rock>();
+            rock.Init(20, this);
             BulletTimer = BulletSpawnTime;
         }
         
     }
+
 }

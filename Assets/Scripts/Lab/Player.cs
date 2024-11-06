@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character, Ishootable
+public class Player : Character, IShootable
 {
     [SerializeField] private float attackRange;
     [SerializeField] public Player player;
@@ -12,6 +12,7 @@ public class Player : Character, Ishootable
     [field: SerializeField] public float BulletSpawnTime { get; set; }
     [field: SerializeField] public float BulletTimer { get; set; }
 
+    
     private void Update()
     {
         BulletTimer -= Time.deltaTime;
@@ -35,10 +36,25 @@ public class Player : Character, Ishootable
     {
         if (BulletTimer <= 0)
         {
-            Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity);
-
+            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity);
+            Banana banana = obj.GetComponent<Banana>();
+            banana.Init(30,this);
             BulletTimer = BulletSpawnTime;
+            BulletSpawnTime = 0;
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null )
+        {
+            OnHitWith(enemy);
+        }
+    }
+    void OnHitWith(Enemy enemy)
+    {
+        TakeDamage(enemy.DamageHit);
     }
 }
