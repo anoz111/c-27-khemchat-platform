@@ -17,9 +17,6 @@ public abstract class Enemy : Character
         }
     }
 
-    public Animator anim;
-    public Rigidbody2D rb;
-    [SerializeField] private int health;
     private void Start()
     {
         Behavior();

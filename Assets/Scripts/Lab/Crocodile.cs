@@ -16,6 +16,7 @@ public class Crocodile : Enemy, IShootable
 
     void Start()
     {
+        
         BulletTimer = 0.0f;
         BulletSpawnTime = 5.0f;
         DamageHit = 30;

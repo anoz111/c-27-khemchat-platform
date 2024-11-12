@@ -6,7 +6,7 @@ using UnityEngine;
 public class Rock : Weapon
 {
     Rigidbody2D rb2d;
-    Vector2 force;
+    [SerializeField]Vector2 force;
 
     public override void Move()
     {
@@ -26,7 +26,7 @@ public class Rock : Weapon
     public void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        force = new Vector2(GetShootDirection() * 10,100);
+        force = new Vector2(GetShootDirection() * 100,400);
         Damage = 20;
         Move();
     }

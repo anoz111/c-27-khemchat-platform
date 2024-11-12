@@ -12,7 +12,11 @@ public class Player : Character, IShootable
     [field: SerializeField] public float BulletSpawnTime { get; set; }
     [field: SerializeField] public float BulletTimer { get; set; }
 
-    
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         BulletTimer -= Time.deltaTime;
@@ -56,5 +60,6 @@ public class Player : Character, IShootable
     void OnHitWith(Enemy enemy)
     {
         TakeDamage(enemy.DamageHit);
+        
     }
 }
