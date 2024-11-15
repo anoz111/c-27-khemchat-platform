@@ -14,7 +14,7 @@ public class Player : Character, IShootable
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -42,7 +42,7 @@ public class Player : Character, IShootable
         {
             GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity);
             Banana banana = obj.GetComponent<Banana>();
-            banana.Init(30,this);
+            banana.Init(10,this);
             BulletTimer = BulletSpawnTime;
             BulletSpawnTime = 0;
         }
@@ -55,6 +55,7 @@ public class Player : Character, IShootable
         if (enemy != null )
         {
             OnHitWith(enemy);
+            Debug.Log($"{this.name} hit with {enemy.name} dealing {enemy.DamageHit} damage.");
         }
     }
     void OnHitWith(Enemy enemy)

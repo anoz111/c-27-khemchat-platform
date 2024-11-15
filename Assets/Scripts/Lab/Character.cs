@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
+    public int maxHealth = 100;
     [SerializeField] private int health;
     public int Health
     {
@@ -44,5 +46,17 @@ public abstract class Character : MonoBehaviour
         Health -= damage;
         Debug.Log($"Take Damage monkey Hp remaining : {Health}");
         IsDead();
+        healthBar.SetHealth(Health);
+    }
+
+    void Start()
+    {
+        Health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+    void Update()
+    {
+        
     }
 }

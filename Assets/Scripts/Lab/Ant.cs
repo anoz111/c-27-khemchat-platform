@@ -10,7 +10,9 @@ public class Ant : Enemy
 
     private void Start()
     {
+        Health = 100;
         Behavior();
+        DamageHit = 10;
     }
 
 
